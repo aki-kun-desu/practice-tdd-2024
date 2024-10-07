@@ -2,10 +2,8 @@ import { Dollar } from "../src/dollar";
 
 test("$5 * 2 = $10", () => {
   const five = Dollar(5);
-  let product = five.times(2);
-  expect(product.getAmount()).toBe(10);
-  product = five.times(3);
-  expect(product.getAmount()).toBe(15);
+  expect(five.times(2).getAmount()).toEqual(Dollar(10).getAmount());
+  expect(five.times(3).getAmount()).toEqual(Dollar(15).getAmount());
 });
 
 test("equals()", () => {
