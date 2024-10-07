@@ -1,3 +1,5 @@
+import { Money } from "./money";
+
 type Franc = {
   getAmount: () => number;
   times: (multiplier: number) => Franc;
@@ -9,10 +11,7 @@ export const Franc = (initialAmount: number): Franc => {
   const times = (multiplier: number) => {
     return Franc(amount * multiplier);
   };
-  const equals = (other: object): boolean => {
-    const franc = other as Franc;
-    return amount === franc.getAmount();
-  };
+  const { equals } = Money(initialAmount);
   return {
     getAmount,
     times,

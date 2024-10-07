@@ -8,5 +8,6 @@
 - [ ] null との等価性比較
 - [ ] 他のオブジェクトとの等価性比較
 - [x] 5CHF \* 2 = 10 CHF
+- [ ] Dollar と Franc の重複
 - [x] equals()の一般化
 - [x] times()の一般化

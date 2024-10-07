@@ -10,6 +10,8 @@ test("$5 * 2 = $10", () => {
 test("equals()", () => {
   expect(Dollar(5).equals(Dollar(5))).toBe(true);
   expect(Dollar(5).equals(Dollar(6))).toBe(false);
+  expect(Franc(5).equals(Franc(5))).toBe(true);
+  expect(Franc(5).equals(Franc(6))).toBe(false);
 });
 
 test("5CHF * 2 = 10CHF", () => {

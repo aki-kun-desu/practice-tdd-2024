@@ -1,18 +1,12 @@
-type Dollar = {
-  getAmount: () => number;
-  times: (multiplier: number) => Dollar;
-  equals: (other: Dollar) => boolean;
-};
-export const Dollar = (initialAmount: number): Dollar => {
+import { Money } from "./money";
+
+export const Dollar = (initialAmount: number): Money => {
   let amount: number = initialAmount;
   const getAmount = () => amount;
   const times = (multiplier: number) => {
     return Dollar(amount * multiplier);
   };
-  const equals = (other: object): boolean => {
-    const dollar = other as Dollar;
-    return amount === dollar.getAmount();
-  };
+  const { equals } = Money(initialAmount);
   return {
     getAmount,
     times,
