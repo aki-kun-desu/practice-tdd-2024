@@ -1,8 +1,9 @@
 import { Dollar } from "../src/dollar";
 import { Franc } from "../src/franc";
+import { Money } from "../src/money";
 
 test("$5 * 2 = $10", () => {
-  const five = Dollar(5);
+  const five = Money.dollar(5);
   expect(five.times(2).getAmount()).toEqual(Dollar(10).getAmount());
   expect(five.times(3).getAmount()).toEqual(Dollar(15).getAmount());
 });
