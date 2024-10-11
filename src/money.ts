@@ -10,6 +10,7 @@ export type Money = {
 type MoneyConstructor = {
   (initialAmount: number, currency: Currency): Money;
   dollar: (amount: number) => Money;
+  franc: (amount: number) => Money;
 };
 
 export const Money: MoneyConstructor = (
@@ -34,4 +35,8 @@ export const Money: MoneyConstructor = (
 
 Money.dollar = (amount: number): Money => {
   return Money(amount, "USD");
+};
+
+Money.franc = (amount: number): Money => {
+  return Money(amount, "CHF");
 };

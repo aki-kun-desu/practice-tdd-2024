@@ -17,7 +17,7 @@ test("equals()", () => {
 });
 
 test("5CHF * 2 = 10CHF", () => {
-  const five = Franc(5);
+  const five = Money.franc(5);
   expect(five.times(2).getAmount()).toEqual(Franc(10).getAmount());
   expect(five.times(3).getAmount()).toEqual(Franc(15).getAmount());
 });
