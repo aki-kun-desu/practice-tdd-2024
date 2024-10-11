@@ -1,13 +1,9 @@
-import { Dollar } from "./dollar";
-import { Franc } from "./franc";
-
-// ファクトリ関数ではプライベートフィールドは定義できない
 export type Currency = "USD" | "CHF";
 export type Money = {
   getAmount: () => number;
   times: (multiplier: number) => Money;
   equals: (other: Money) => boolean;
-  currency: Currency;
+  getCurrency: () => Currency;
 };
 
 type MoneyConstructor = {
@@ -23,7 +19,7 @@ export const Money: MoneyConstructor = (
   let amount: number = initialAmount;
   const equals = (other: object): boolean => {
     const money = other as Money;
-    return amount === money.getAmount() && currency === money.currency;
+    return amount === money.getAmount() && currency === money.getCurrency();
   };
   const times = (multiplier: number) => {
     return Money(amount * multiplier, currency);
@@ -32,14 +28,14 @@ export const Money: MoneyConstructor = (
     getAmount: () => amount,
     times,
     equals,
-    currency,
+    getCurrency: () => currency,
   };
 };
 
 Money.dollar = (amount: number): Money => {
-  return Dollar(amount);
+  return Money(amount, "USD");
 };
 
 Money.franc = (amount: number): Money => {
-  return Franc(amount);
+  return Money(amount, "CHF");
 };

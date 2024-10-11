@@ -22,7 +22,7 @@ test("5CHF * 2 = 10CHF", () => {
   expect(five.times(3).getAmount()).toEqual(Money.franc(15).getAmount());
 });
 
-// test("同じ通貨であること", () => {
-//   expect("USD").toBe(Money.dollar(1).currency());
-//   expect("CHF").toBe(Money.franc(1).currency());
-// });
+test("同じ通貨であること", () => {
+  expect("USD").toBe(Money.dollar(1).getCurrency());
+  expect("CHF").toBe(Money.franc(1).getCurrency());
+});
