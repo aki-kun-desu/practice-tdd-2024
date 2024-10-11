@@ -1,3 +1,6 @@
+import { Dollar } from "./dollar";
+import { Franc } from "./franc";
+
 // ファクトリ関数ではプライベートフィールドは定義できない
 export type Currency = "USD" | "CHF";
 export type Money = {
@@ -34,9 +37,9 @@ export const Money: MoneyConstructor = (
 };
 
 Money.dollar = (amount: number): Money => {
-  return Money(amount, "USD");
+  return Dollar(amount);
 };
 
 Money.franc = (amount: number): Money => {
-  return Money(amount, "CHF");
+  return Franc(amount);
 };
