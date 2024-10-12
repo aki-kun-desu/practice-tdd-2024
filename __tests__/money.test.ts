@@ -1,5 +1,5 @@
-import { Dollar } from "../src/dollar";
-import { Franc } from "../src/franc";
+import { Bank } from "../src/bank";
+import { Expression } from "../src/expression";
 import { Money } from "../src/money";
 
 test("$5 * 2 = $10", () => {
@@ -25,4 +25,12 @@ test("5CHF * 2 = 10CHF", () => {
 test("同じ通貨であること", () => {
   expect("USD").toBe(Money.dollar(1).getCurrency());
   expect("CHF").toBe(Money.franc(1).getCurrency());
+});
+
+test("$5 + $5 = $10", () => {
+  const five: Money = Money.dollar(5);
+  const sum: Expression = five.plus(Money.dollar(5));
+  const bank = Bank();
+  const reduced: Money = bank.reduce(sum, "USD");
+  expect(Money.dollar(10).equals(reduced)).toBe(true);
 });

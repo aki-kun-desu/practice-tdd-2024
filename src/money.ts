@@ -1,10 +1,13 @@
+import { Expression } from "./expression";
+
 export type Currency = "USD" | "CHF";
 export type Money = {
   getAmount: () => number;
   times: (multiplier: number) => Money;
   equals: (other: Money) => boolean;
   getCurrency: () => Currency;
-};
+  plus: (added: Money) => Expression;
+} & Expression;
 
 type MoneyConstructor = {
   (initialAmount: number, currency: Currency): Money;
@@ -24,11 +27,15 @@ export const Money: MoneyConstructor = (
   const times = (multiplier: number) => {
     return Money(amount * multiplier, currency);
   };
+  const plus = (added: Money) => {
+    return Money(amount + added.getAmount(), currency);
+  };
   return {
     getAmount: () => amount,
     times,
     equals,
     getCurrency: () => currency,
+    plus,
   };
 };
 
