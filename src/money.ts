@@ -56,8 +56,7 @@ export const Money: MoneyConstructor = (
   };
   const reduce = (bank: Bank, to: Currency) => {
     const rate = bank.rate(currency, to);
-    console.log("rate", rate);
-    return Money(amount / rate, currency);
+    return Money(amount / rate, to);
   };
   return {
     getAmount: () => amount,
