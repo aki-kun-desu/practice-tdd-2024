@@ -1,6 +1,7 @@
 import { Bank } from "../src/bank";
 import { Expression } from "../src/expression";
 import { Money } from "../src/money";
+import { Sum } from "../src/sum";
 
 test("$5 * 2 = $10", () => {
   const five = Money.dollar(5);
@@ -33,4 +34,19 @@ test("$5 + $5 = $10", () => {
   const bank = Bank();
   const reduced: Money = bank.reduce(sum, "USD");
   expect(Money.dollar(10).equals(reduced)).toBe(true);
+});
+
+test("plusがSUM型を返すこと", () => {
+  const five: Money = Money.dollar(5);
+  const result: Expression = five.plus(Money.dollar(5));
+  const sum: Sum = result as Sum;
+  expect(five.equals(sum.augend)).toBe(true);
+  expect(five.equals(sum.addend)).toBe(true);
+});
+
+test("reduce sumのテスト", () => {
+  const sum: Expression = Sum(Money.dollar(3), Money.dollar(4));
+  const bank: Bank = Bank();
+  const result: Money = bank.reduce(sum, "USD");
+  expect(result.equals(Money.dollar(7))).toBe(true);
 });

@@ -1,4 +1,5 @@
 import { Expression } from "./expression";
+import { Sum } from "./sum";
 
 export type Currency = "USD" | "CHF";
 export type Money = {
@@ -28,7 +29,7 @@ export const Money: MoneyConstructor = (
     return Money(amount * multiplier, currency);
   };
   const plus = (added: Money) => {
-    return Money(amount + added.getAmount(), currency);
+    return Sum(Money(amount, currency), added);
   };
   return {
     getAmount: () => amount,
