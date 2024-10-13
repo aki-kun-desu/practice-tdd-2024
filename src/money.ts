@@ -8,12 +8,31 @@ export type Money = {
   equals: (other: Money) => boolean;
   getCurrency: () => Currency;
   plus: (added: Money) => Expression;
+  reduce: (to: Currency) => Money;
 } & Expression;
 
 type MoneyConstructor = {
   (initialAmount: number, currency: Currency): Money;
   dollar: (amount: number) => Money;
   franc: (amount: number) => Money;
+};
+
+// Money型ガード
+export const isMoney = (obj: any): obj is Money => {
+  return (
+    typeof obj === "object" &&
+    obj !== null &&
+    "getAmount" in obj &&
+    "times" in obj &&
+    "equals" in obj &&
+    "getCurrency" in obj &&
+    "plus" in obj &&
+    typeof obj.getAmount === "function" &&
+    typeof obj.times === "function" &&
+    typeof obj.equals === "function" &&
+    typeof obj.getCurrency === "function" &&
+    typeof obj.plus === "function"
+  );
 };
 
 export const Money: MoneyConstructor = (
@@ -31,12 +50,16 @@ export const Money: MoneyConstructor = (
   const plus = (added: Money) => {
     return Sum(Money(amount, currency), added);
   };
+  const reduce = (to: Currency) => {
+    return Money(amount, currency);
+  };
   return {
     getAmount: () => amount,
     times,
     equals,
     getCurrency: () => currency,
     plus,
+    reduce,
   };
 };
 

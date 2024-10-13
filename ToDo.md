@@ -1,6 +1,7 @@
 - [ ] $5 + 10CHF = $10（レートが 2:1 の場合）
 - [ ] $5 + $5 = $10
 - [ ] $5 + $5 が Money を返す
+- [x] Bank.reduce(Money)
 - [x] $5 \* 2 = $10
 - [x] amount を private にする
 - [x] Dollar の副作用をどうする？

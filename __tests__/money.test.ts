@@ -50,3 +50,9 @@ test("reduce sumのテスト", () => {
   const result: Money = bank.reduce(sum, "USD");
   expect(result.equals(Money.dollar(7))).toBe(true);
 });
+
+test("reduce Moneyのテスト", () => {
+  const bank: Bank = Bank();
+  const result: Money = bank.reduce(Money.dollar(1), "USD");
+  expect(result.equals(Money.dollar(1))).toBe(true);
+});
