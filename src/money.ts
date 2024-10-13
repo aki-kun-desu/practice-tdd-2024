@@ -8,7 +8,6 @@ export type Money = {
   equals: (other: Money) => boolean;
   getCurrency: () => Currency;
   plus: (added: Money) => Expression;
-  reduce: (to: Currency) => Money;
 } & Expression;
 
 type MoneyConstructor = {
