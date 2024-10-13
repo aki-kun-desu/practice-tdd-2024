@@ -1,5 +1,6 @@
+import { Bank } from "./bank";
 import { Currency, Money } from "./money";
 
 export type Expression = {
-  reduce: (to: Currency) => Money;
+  reduce: (bank: Bank, to: Currency) => Money;
 };

@@ -56,3 +56,15 @@ test("reduce Moneyのテスト", () => {
   const result: Money = bank.reduce(Money.dollar(1), "USD");
   expect(result.equals(Money.dollar(1))).toBe(true);
 });
+
+test("異なる通貨同士の計算", () => {
+  const bank: Bank = Bank();
+  bank.addRate("CHF", "USD", 2);
+  const result: Money = bank.reduce(Money.franc(2), "USD");
+  expect(result.equals(Money.dollar(1))).toBe(true);
+});
+
+test("同じ通貨同士の為替レート", () => {
+  const bank: Bank = Bank();
+  expect(Bank().rate("USD", "USD")).toBe(1);
+});

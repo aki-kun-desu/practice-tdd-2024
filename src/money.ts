@@ -1,3 +1,4 @@
+import { Bank } from "./bank";
 import { Expression } from "./expression";
 import { Sum } from "./sum";
 
@@ -41,7 +42,11 @@ export const Money: MoneyConstructor = (
   let amount: number = initialAmount;
   const equals = (other: object): boolean => {
     const money = other as Money;
-    return amount === money.getAmount() && currency === money.getCurrency();
+    return (
+      isMoney(money) &&
+      amount === money.getAmount() &&
+      currency === money.getCurrency()
+    );
   };
   const times = (multiplier: number) => {
     return Money(amount * multiplier, currency);
@@ -49,8 +54,10 @@ export const Money: MoneyConstructor = (
   const plus = (added: Money) => {
     return Sum(Money(amount, currency), added);
   };
-  const reduce = (to: Currency) => {
-    return Money(amount, currency);
+  const reduce = (bank: Bank, to: Currency) => {
+    const rate = bank.rate(currency, to);
+    console.log("rate", rate);
+    return Money(amount / rate, currency);
   };
   return {
     getAmount: () => amount,
