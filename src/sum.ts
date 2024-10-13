@@ -12,7 +12,8 @@ export const Sum = (argAugend: Money, argAddend: Money): Sum => {
   const augend = argAugend;
   const addend = argAddend;
   const reduce = (bank: Bank, to: Currency): Money => {
-    const amount: number = augend.getAmount() + addend.getAmount();
+    const amount: number =
+      augend.reduce(bank, to).getAmount() + addend.reduce(bank, to).getAmount();
     return Money(amount, to);
   };
   return {

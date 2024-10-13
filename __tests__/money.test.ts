@@ -4,7 +4,7 @@ import { Money } from "../src/money";
 import { Sum } from "../src/sum";
 
 test("$5 * 2 = $10", () => {
-  const five = Money.dollar(5);
+  const five: Money = Money.dollar(5);
   expect(five.times(2).getAmount()).toEqual(Money.dollar(10).getAmount());
   expect(five.times(3).getAmount()).toEqual(Money.dollar(15).getAmount());
 });
@@ -67,4 +67,13 @@ test("異なる通貨同士の計算", () => {
 test("同じ通貨同士の為替レート", () => {
   const bank: Bank = Bank();
   expect(Bank().rate("USD", "USD")).toBe(1);
+});
+
+test("DollarとFrancの足し算", () => {
+  const fiveBucks: Money = Money.dollar(5);
+  const tenFrancs: Money = Money.franc(10);
+  const bank: Bank = Bank();
+  bank.addRate("CHF", "USD", 2);
+  const result: Money = bank.reduce(fiveBucks.plus(tenFrancs), "USD");
+  expect(result.equals(Money.dollar(10))).toBe(true);
 });
